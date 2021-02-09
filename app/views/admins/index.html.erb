@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Dashboard Users</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Admin</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.admin %></td>
+        <% if user.admin? %>
+          <td><%= link_to 'False', admins_admin_false_path(user), class:"btn btn-primary" %></td>
+        <% else %>
+          <td><%= link_to 'True', admins_admin_true_path(user), class:"btn btn-success" %></td>
+        <% end %>
+        <td><%= link_to 'Destroy', user_registration_path, method: :delete, data: { confirm: 'Are you sure?' } , class:"btn btn-danger"%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

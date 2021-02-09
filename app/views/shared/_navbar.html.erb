@@ -17,12 +17,30 @@
             <span class="caret"></span>
           </a>
           <!-- ¡Pending implementation! Should work toggling between sign_in and sign_out -->
+           <% if current_user && current_user.admin?%>
           <ul class="dropdown-menu">
-            <li><%=link_to 'Create PicStory', new_story_path %></li>
-            <li><%=link_to 'My PicStories', stories_path %></li>
-            <li><a href="#">'My Profile'</a></li>
+          <li><%=link_to 'Dashboard Users', admins_index_path %></li>
+           <li><%=link_to 'Create PicStory', new_story_path %></li>
+            <li><%=link_to 'My PicStories', dashboard_path %></li>
+            <li><%=link_to 'My Profile', edit_user_registration_path%></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">'Sign Out'</a></li>
+            <li> <%=link_to('Log out', destroy_user_session_path, method: :delete)%></li>
+          </ul>
+         <% elsif current_user %>
+         <ul class="dropdown-menu">
+           <li><%=link_to 'Create PicStory', new_story_path %></li>
+            <li><%=link_to 'My PicStories', dashboard_path %></li>
+            <li><%=link_to 'My Profile', edit_user_registration_path%></li>
+            <li role="separator" class="divider"></li>
+            <li> <%=link_to('Log out', destroy_user_session_path, method: :delete)%></li>
+          </ul>
+          <%else%>
+         <ul class="dropdown-menu">
+             <li> <%=link_to 'Register', new_user_registration_path%></li>
+            <li role="separator" class="divider"></li>
+            <li> <%=link_to 'Log in', new_user_session_path%></li>
+          </ul>
+         <%end%>
           </ul>
         </li>
       </ul>
